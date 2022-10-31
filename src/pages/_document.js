@@ -5,12 +5,12 @@ class MyDocument extends Document {
         return (
             <Html>
 
-       
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
                 <Head>
 
                     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-
+                 
 
                 </Head>
 
