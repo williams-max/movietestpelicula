@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import CardMovie from './card/cardMovie';
 import sportsData from '../sampleData/sportsData';
 import dynamic from 'next/dynamic'
-import { CardActionArea, Card, CardMedia, Typography } from '@mui/material';
+import { CardActionArea, Card, CardMedia, Typography, Button } from '@mui/material';
+import styles from '../styles/Home.module.css'
 const ReactHlsPlayer = dynamic(
     () => import('react-hls-player'),
     { ssr: false },
@@ -11,13 +12,15 @@ const ReactHlsPlayer = dynamic(
 const Sports = () => {
 
     const [movieActual, SetMovieActual] = useState("http://190.210.221.119/Processor3_9_chunklist_b1300000.m3u8")
+    const [titulo, setTitulo] = useState("Directv Sports");
     console.log("da", sportsData)
 
 
-    const openMovie = (url, e) => {
+    const openMovie = (url, title, e) => {
 
         console.log("url ", url)
         SetMovieActual(url);
+        setTitulo(title)
     }
 
     const CardMovie = (image, url, title) => {
@@ -32,9 +35,9 @@ const Sports = () => {
                         component="img"
                         // height="140"
                         image={image}
-                        alt="green iguana"
+                        alt="movie"
 
-                        onClick={(e) => openMovie(url, e)}
+                        onClick={(e) => openMovie(url, title, e)}
                     />
 
                 </Card>
@@ -47,15 +50,30 @@ const Sports = () => {
 
     return (
         <div>
-            <h1>Sports - Directv Sports</h1>
-            <ReactHlsPlayer
-                src={movieActual}
-                autoPlay={false}
-                controls={true}
-                width="70%"
-                height="auto"
-            />
+            <h1>Sports - {titulo}</h1>
 
+            <div className={styles.containermovie}>
+                <div>
+                    <ReactHlsPlayer
+                        src={movieActual}
+                        autoPlay={true}
+                        controls={true}
+                        width="70%"
+                        height="auto"
+                    />
+                </div>
+
+
+                <div>
+                    <a style={{ textDecoration: "none", fontSize: '15px',backgroundColor:'yellow', 
+                    fontWeight: '400', color: 'black' }}
+                        target="_blank" rel="noreferrer"
+                        href={movieActual}
+                    >
+                        Click Si no cargao el video
+                    </a>
+                </div>
+            </div>
             {
                 sportsData.map((element, index) => {
                     return (

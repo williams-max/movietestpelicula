@@ -1,6 +1,13 @@
 .container {
   padding: 0 2rem;
 }
+.containermovie{
+ background-color: #9fe4cd81; 
+ display: 'flex';
+ flex-direction: row;
+flex-direction: column;
+
+}
 
 .main {
   min-height: 100vh;

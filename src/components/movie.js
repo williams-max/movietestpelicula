@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import CardMovie from './card/cardMovie';
 import movieData from '../sampleData/movieData';
 import dynamic from 'next/dynamic'
+import styles from '../styles/Home.module.css'
 import { CardActionArea, Card, CardMedia, Typography } from '@mui/material';
 const ReactHlsPlayer = dynamic(
     () => import('react-hls-player'),
@@ -11,6 +12,7 @@ const ReactHlsPlayer = dynamic(
 const Movie = () => {
 
     const [movieActual, SetMovieActual] = useState("https://adultswim-vodlive.cdn.turner.com/live/test-2/stream_de.m3u8")
+    const [titulo, setTitulo] = useState("default");
     console.log("da", movieData)
 
 
@@ -18,6 +20,7 @@ const Movie = () => {
 
         console.log("url ", url)
         SetMovieActual(url);
+        setTitulo(title)
     }
 
     const CardMovie = (image, url, title) => {
@@ -32,7 +35,7 @@ const Movie = () => {
                         component="img"
                         // height="140"
                         image={image}
-                        alt="green iguana"
+                        alt="movie"
 
                         onClick={(e) => openMovie(url, e)}
                     />
@@ -47,14 +50,29 @@ const Movie = () => {
 
     return (
         <div>
-            <h1>Movie - Default</h1>
-            <ReactHlsPlayer
-                src={movieActual}
-                autoPlay={false}
-                controls={true}
-                width="70%"
-                height="auto"
-            />
+            <h1>Movie - {titulo}</h1>
+          <div className={styles.containermovie}>
+                <div>
+                    <ReactHlsPlayer
+                        src={movieActual}
+                        autoPlay={true}
+                        controls={true}
+                        width="70%"
+                        height="auto"
+                    />
+                </div>
+
+
+                <div>
+                    <a style={{ textDecoration: "none", fontSize: '15px',backgroundColor:'yellow', 
+                    fontWeight: '400', color: 'black' }}
+                        target="_blank" rel="noreferrer"
+                        href={movieActual}
+                    >
+                        Click Si no cargao el video
+                    </a>
+                </div>
+            </div>
 
             {
                 movieData.map((element, index) => {

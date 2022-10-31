@@ -11,7 +11,8 @@ import Sports from '../components/sports';
 import Movie from '../components/movie';
 import MovieIndi from '../components/movieIndi';
 
-export default function Home() {
+export default function Home({ userActive }) {
+  console.log("user ", userActive)
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -29,12 +30,12 @@ export default function Home() {
    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
         <Tabs value={value} onChange={handleChange} centered>
           <Tab label="Sports" />
-          <Tab label="Movie Accion-Anime" />
+          <Tab label="Movie Accion" />
           <Tab label="Movie Indi" />
         </Tabs>
       </Box>
 
-      <h1>Sports</h1>
+      
       {value == 0 ?
         <>
           <Sports />
@@ -60,10 +61,19 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Power{' '}
 
         </a>
       </footer>
     </div>
   )
 }
+
+export async function getServerSideProps({ req, res }) {
+  //const cookies = parseCookies(req);
+
+  return {
+      props: { userActive: "Tony Montana" },
+  }
+}
+
