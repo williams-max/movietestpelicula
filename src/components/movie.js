@@ -59,7 +59,7 @@ const Movie = () => {
             {
                 movieData.map((element, index) => {
                     return (
-                        <div>
+                        <div key={index}>
 
                             {CardMovie(element.image, element.url, element.title)}
 
